@@ -1,4 +1,4 @@
-package com.appdirect.jackson.json
+package com.psmelser.jackson.json
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode

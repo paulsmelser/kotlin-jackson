@@ -1,4 +1,4 @@
-package com.appdirect.jackson.json;
+package com.psmelser.jackson.json;
 
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;

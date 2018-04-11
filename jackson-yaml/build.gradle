@@ -1,3 +1,18 @@
+apply plugin: 'pl.allegro.tech.build.axion-release'
+
+scmVersion {
+	tag {
+		prefix = 'jackson-yaml'
+	}
+	checks {
+		uncommittedChanges = false
+	}
+	nextVersion {
+		suffix = 'rc'
+		separator = '-'
+	}
+}
+
 dependencies {
 	compile (
 			[group: 'com.fasterxml.jackson.dataformat',		name: 'jackson-dataformat-yaml',	version: "$jackson_version"]

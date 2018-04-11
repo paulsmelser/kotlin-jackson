@@ -1,6 +1,6 @@
-package com.appdirect.jackson.yaml
+package com.psmelser.jackson.yaml
 
-import com.appdirect.jackson.json.YamlConverter
+import com.psmelser.jackson.json.YamlConverter
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 

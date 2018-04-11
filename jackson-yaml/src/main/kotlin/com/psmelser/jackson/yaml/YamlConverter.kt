@@ -1,6 +1,6 @@
-package com.appdirect.jackson.json
+package com.psmelser.jackson.json
 
-import com.appdirect.jackson.yaml.YamlSerializationSettings
+import com.psmelser.jackson.yaml.YamlSerializationSettings
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature

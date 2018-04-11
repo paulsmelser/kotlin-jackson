@@ -1,4 +1,4 @@
-package com.appdirect.jackson.yaml
+package com.psmelser.jackson.yaml
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.MapperFeature
