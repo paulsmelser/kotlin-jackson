@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 
 class JsonConverter {
     val objectMapper: ObjectMapper
@@ -20,6 +21,7 @@ class JsonConverter {
                 .with(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 .with(MapperFeature.DEFAULT_VIEW_INCLUSION, false)
                 .with(JavaTimeModule())
+                .with(KotlinModule())
                 .build()
                 .createMapper()
     }

@@ -51,11 +51,11 @@ subprojects {
 				[group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jdk8", version: "$kotlin_version"],
 				[group: "com.fasterxml.jackson.datatype", name: "jackson-datatype-jsr310", version: "$jackson_version"],
 				[group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "$jackson_version"],
+				[group: "com.fasterxml.jackson.module", name: "jackson-module-kotlin", version: "2.9.4.1"]
 		)
 		runtime(
 				[
 						[group: "com.fasterxml.jackson.datatype", name: "jackson-datatype-jdk8", version: "$jackson_version"],
-						[group: "com.fasterxml.jackson.module", name: "jackson-module-kotlin", version: "2.9.4.1"]
 				]
 		)
 		testCompile(
