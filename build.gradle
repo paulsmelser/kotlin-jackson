@@ -2,15 +2,17 @@ buildscript {
 	ext.kotlin_version = '1.2.30'
 	ext.jackson_version = '2.9.4'
 	ext.junit4Version = '4.12'
+	ext.dokka_version = '0.9.16'
 
 	repositories {
 		mavenCentral()
 		jcenter()
 	}
 	dependencies {
-		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
 		classpath 'pl.allegro.tech.build:axion-release-plugin:1.8.1'
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+		classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
 	}
 }
 

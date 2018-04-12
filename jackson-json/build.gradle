@@ -3,6 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'org.jetbrains.dokka'
 
 scmVersion {
 	tag {
@@ -24,14 +25,19 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: Javadoc) {
-	classifier = 'javadoc'
-	from javadoc.destinationDir
+dokka {
+	outputFormat = 'html'
+	outputDirectory = "$buildDir/javadoc"
 }
+
+//task javadocJar(type: Jar, dependsOn: Javadoc) {
+//	classifier = 'javadoc'
+//	from javadoc.destinationDir
+//}
 
 artifacts {
 	archives sourcesJar
-	archives javadocJar
+//	archives javadocJar
 }
 
 bintray {
