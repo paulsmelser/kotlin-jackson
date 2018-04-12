@@ -86,8 +86,8 @@ publishing {
 				}
 			}
 
-			Artifact sourcesJar
-			Artifact javadocJar
+			artifact sourcesJar
+			artifact javadocJar
 			from components.java
 		}
 	}
@@ -103,12 +103,12 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-//task javadocJar(type: Jar, dependsOn: Javadoc) {
-//	classifier = 'javadoc'
-//	from javadoc.destinationDir
-//}
+task javadocJar(type: Jar, dependsOn: Javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
 
 artifacts {
 	archives sourcesJar
-//	archives javadocJar
+	archives javadocJar
 }
