@@ -24,7 +24,13 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-task javadocJar(type: Jar, dependsOn: Javadoc) {
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+	outputFormat = 'javadoc'
+	outputDirectory = javadoc.destinationDir
+	inputs.dir 'src/main/kotlin'
+}
+
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
 	classifier = 'javadoc'
 	from javadoc.destinationDir
 }
