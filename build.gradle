@@ -27,7 +27,7 @@ subprojects {
 	apply plugin: 'pl.allegro.tech.build.axion-release'
 
 	group 'com.psmelser'
-	version scmVersion.version
+//	version scmVersion.version
 
 	scmVersion {
 		tag {
