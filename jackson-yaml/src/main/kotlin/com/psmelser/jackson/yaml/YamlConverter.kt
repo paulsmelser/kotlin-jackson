@@ -1,13 +1,13 @@
 package com.psmelser.jackson.json
 
-import com.psmelser.jackson.yaml.YamlSerializationSettings
-import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.databind.node.ObjectNode
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.psmelser.jackson.yaml.YamlSerializationSettings
 import java.io.IOException
 
 class YamlConverter {
@@ -30,41 +30,33 @@ class YamlConverter {
     }
 
     fun <T> fromYaml(jsonString: String, targetClass: Class<T>): T {
-        try {
+        return wrapException {
             val reader = objectMapper
                     .reader()
                     .forType(targetClass)
 
-            return reader.readValue(jsonString)
-
-        } catch (e: IOException) {
-            throw YamlSerializationException(e)
+            reader.readValue(jsonString)
         }
-
     }
 
     fun <T> fromYaml(jsonString: String, targetClass: TypeReference<*>): T {
-        try {
-            return objectMapper.readValue(jsonString, targetClass)
-
-        } catch (e: IOException) {
-            throw YamlSerializationException(e)
+        return wrapException {
+            objectMapper.readValue(jsonString, targetClass)
         }
+    }
 
+    fun toObjectNode(json: String): ObjectNode {
+        return wrapException { objectMapper.readTree(json) as ObjectNode }
     }
 
     fun <T> fromYaml(jsonString: String, targetClass: Class<T>, serializationSettings: YamlSerializationSettings): T {
-        try {
+        return wrapException {
             val reader = serializationSettings.createMapper()
                     .reader()
                     .forType(targetClass)
 
-            return reader.readValue(jsonString)
-
-        } catch (e: IOException) {
-            throw YamlSerializationException(e)
+            reader.readValue(jsonString)
         }
-
     }
 
     inline fun <reified T> fromYaml(jsonString: String): T {
@@ -95,20 +87,22 @@ class YamlConverter {
     }
 
     fun <T> toYaml(objectToSerialize: T): String {
-        return try {
+        return wrapException {
             objectMapper.writer().writeValueAsString(objectToSerialize)
-        } catch (e: JsonProcessingException) {
-            throw YamlSerializationException(e)
         }
-
     }
 
     fun <T> toYaml(objectToSerialize: T, serializationSettings: YamlSerializationSettings): String {
-        return try {
+        return wrapException {
             serializationSettings.createMapper().writer().writeValueAsString(objectToSerialize)
-        } catch (e: JsonProcessingException) {
+        }
+    }
+
+    private inline fun <T> wrapException(action: () -> T) : T {
+        return try {
+            action()
+        } catch (e: Exception) {
             throw YamlSerializationException(e)
         }
-
     }
 }
