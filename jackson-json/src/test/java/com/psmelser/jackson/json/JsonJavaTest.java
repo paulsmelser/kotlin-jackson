@@ -21,7 +21,7 @@ public class JsonJavaTest {
 
 	@Test
 	public void testFromJson() {
-		TestClass expectedValue = new TestClass();
+		TestClass expectedValue = new TestClass("Hi", 12, 12.3);
 		TestClass actualValue = Json.fromJson(Json.toJson(expectedValue), TestClass.class);
 
 		SoftAssertions.assertSoftly ( it -> {
