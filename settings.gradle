@@ -1,4 +1,4 @@
-rootProject.name = 'jackson'
-include 'jackson-json'
-include 'jackson-yaml'
+rootProject.name = 'kotlin-jackson'
+include 'kotlin-jackson-json'
+include 'kotlin-jackson-yaml'
 
