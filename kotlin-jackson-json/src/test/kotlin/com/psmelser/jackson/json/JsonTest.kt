@@ -1,6 +1,7 @@
 package com.psmelser.jackson.json
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.assertj.core.api.SoftAssertions
 import org.junit.Test
 
@@ -28,4 +29,10 @@ class JsonTest {
         }
     }
 
+    @Test
+    fun `Test fromJson blah`() {
+        assertThatThrownBy { Json.fromJson<TestClass>("{\"name\":\"world\",\"number:\"1\",\"double\":\"ahhh\"}") }
+                .hasMessageContaining("was expecting a colon to separate field name and value")
+                .isInstanceOf(JsonSerializationException::class.java)
+    }
 }

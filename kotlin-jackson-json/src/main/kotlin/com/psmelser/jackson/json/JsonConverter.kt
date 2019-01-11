@@ -13,7 +13,7 @@ class JsonConverter {
     val objectMapper: ObjectMapper
 
     constructor() {
-        objectMapper = JsonSerializationSettings.builder()
+        objectMapper = JsonSerializationSettings.Builder()
                 .with(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .with(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
                 .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)

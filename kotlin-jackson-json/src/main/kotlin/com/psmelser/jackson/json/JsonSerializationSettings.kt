@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.MapperFeature
 import com.fasterxml.jackson.databind.Module
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
-import java.util.*
+import java.util.ArrayList
+import java.util.HashMap
 
 class JsonSerializationSettings private constructor(private val deserializationFeatures: Map<DeserializationFeature, Boolean>,
 													private val serializationFeatures: Map<SerializationFeature, Boolean>,
@@ -59,10 +60,4 @@ class JsonSerializationSettings private constructor(private val deserializationF
 			return JsonSerializationSettings(deserializationFeatures, serializationFeatures, mapperFeatures, modules)
 		}
 	}
-
-    companion object {
-        fun builder(): Builder {
-            return Builder()
-        }
-    }
 }
