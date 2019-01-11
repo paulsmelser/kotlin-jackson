@@ -45,11 +45,11 @@ bintray {
 	key = "${bintrayKey}"
 	publications = ['mavenJava']
 	pkg {
-		repo = 'jackson'
+		repo = 'kotlin-jackson'
 		name = project.name
 		userOrg = 'psmelser'
 		licenses = ['MIT']
-		vcsUrl = 'https://github.com/psmelser/kotlin-jackson.git'
+		vcsUrl = 'https://github.com/paulsmelser/kotlin-jackson.git'
 		publish = true
 		version {
 			name = scmVersion.version
@@ -73,15 +73,15 @@ publishing {
 		mavenJava(MavenPublication) {
 			version scmVersion.version
 			groupId group
-			artifactId 'jackson-json'
+			artifactId project.name
 			pom.withXml {
 				asNode().children().last() + {
 					resolveStrategy = Closure.DELEGATE_FIRST
-					name 'jackson-json'
+					name 'kotlin-jackson-json'
 					description 'A jackson extension library to simplify configuration of json serialization using jackson'
-					url "https://github.com/SpringSocialMicrosoft/spring-social-partnercenter"
+					url "https://github.com/paulsmelser/kotlin-jackson"
 					scm {
-						url "https://github.com/paulsmelser/jackson"
+						url "https://github.com/paulsmelser/kotlin-jackson"
 					}
 					licenses {
 						license {

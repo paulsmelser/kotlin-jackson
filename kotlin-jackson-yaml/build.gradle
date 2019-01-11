@@ -52,7 +52,7 @@ bintray {
 	key = "${bintrayKey}"
 	publications = ['mavenJava']
 	pkg {
-		repo = 'jackson'
+		repo = 'kotlin-jackson'
 		name = project.name
 		userOrg = 'psmelser'
 		licenses = ['MIT']
@@ -80,15 +80,15 @@ publishing {
 		mavenJava(MavenPublication) {
 			version scmVersion.version
 			groupId group
-			artifactId 'jackson-yaml'
+			artifactId 'kotlin-jackson-yaml'
 			pom.withXml {
 				asNode().children().last() + {
 					resolveStrategy = Closure.DELEGATE_FIRST
-					name 'jackson-yaml'
+					name 'kotlin-jackson-yaml'
 					description 'A jackson extension library to simplify configuration of json serialization using jackson'
-					url "https://github.com/SpringSocialMicrosoft/spring-social-partnercenter"
+					url "https://github.com/paulsmelser/kotlin-jackson"
 					scm {
-						url "https://github.com/paulsmelser/jackson"
+						url "https://github.com/paulsmelser/kotlin-jackson"
 					}
 					licenses {
 						license {
