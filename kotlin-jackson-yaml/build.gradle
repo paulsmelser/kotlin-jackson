@@ -56,7 +56,7 @@ bintray {
 		name = project.name
 		userOrg = 'psmelser'
 		licenses = ['MIT']
-		vcsUrl = 'https://github.com/psmelser/jackson.git'
+		vcsUrl = 'https://github.com/paulsmelser/kotlin-jackson.git'
 		publish = true
 		version {
 			name = scmVersion.version

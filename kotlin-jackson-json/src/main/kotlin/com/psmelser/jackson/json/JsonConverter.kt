@@ -34,17 +34,17 @@ class JsonConverter {
         return wrapException { objectMapper.reader().forType(targetClass).readValue(jsonString) }
     }
 
-    fun <T> fromJson(jsonString: String, targetClass: TypeReference<*>): T {
-        return wrapException { objectMapper.readValue(jsonString, targetClass) }
-    }
-
-    fun <T> fromJson(jsonString: String, targetClass: Class<T>, serializationSettings: JsonSerializationSettings): T {
-        return wrapException { serializationSettings.createMapper().reader().forType(targetClass).readValue(jsonString) }
+    inline fun <T> fromJsonArray(jsonString: String): T {
+        return try {
+            val typeRef = object : TypeReference<T>() {}
+            objectMapper.readValue(jsonString, typeRef)
+        } catch (e: Exception) {
+            throw JsonSerializationException(e)
+        }
     }
 
     fun <T> toJson(objectToSerialize: T): String {
         return wrapException { objectMapper.writer().writeValueAsString(objectToSerialize) }
-
     }
 
     fun <T> toJson(objectToSerialize: T, serializationSettings: JsonSerializationSettings): String {
@@ -75,7 +75,7 @@ class JsonConverter {
         }
     }
 
-    private inline fun <T> wrapException(action: () -> T) : T {
+    private inline fun <T> wrapException(action: () -> T): T {
         return try {
             action()
         } catch (e: Exception) {

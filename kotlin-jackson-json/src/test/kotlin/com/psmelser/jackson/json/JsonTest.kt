@@ -9,8 +9,24 @@ class JsonTest {
     @Test
     fun `Test Java time serialization`() {
         val expectedValue = TestDateClass()
-        val actualValue = Json.fromJson<TestDateClass>(Json.toJson(expectedValue))
+        val jsonValue = Json.toJson(expectedValue)
+        val actualValue = Json.fromJson<TestDateClass>(jsonValue)
 
+        assertThat(actualValue.instant).isEqualByComparingTo(expectedValue.instant)
+        assertThat(actualValue.zonedDateTime).describedAs("ZonedDateTime").isEqualTo(expectedValue.zonedDateTime)
+        assertThat(actualValue.localDateTime).describedAs("LocalDateTime").isEqualTo(expectedValue.localDateTime)
+        assertThat(actualValue.offsetDateTime.toInstant()).describedAs("OffsetDateTime").isEqualTo(expectedValue.offsetDateTime.toInstant())
+    }
+    @Test
+    fun `Test Java time serializatssion`() {
+        val expectedValue = TestDateClass()
+        val list = listOf(expectedValue)
+        val toJson = Json.toJson(list)
+        val fromJson = Json.fromJsonArray<List<TestDateClass>>(toJson)
+        val jsonValue = Json.toJson(expectedValue)
+        val actualValue = Json.fromJson<TestDateClass>(jsonValue)
+
+        assertThat(fromJson[0].instant).isEqualByComparingTo(expectedValue.instant)
         assertThat(actualValue.instant).isEqualByComparingTo(expectedValue.instant)
         assertThat(actualValue.zonedDateTime).describedAs("ZonedDateTime").isEqualTo(expectedValue.zonedDateTime)
         assertThat(actualValue.localDateTime).describedAs("LocalDateTime").isEqualTo(expectedValue.localDateTime)
@@ -23,6 +39,19 @@ class JsonTest {
         val actualValue = Json.fromJson<TestClass>(Json.toJson(expectedValue))
 
         SoftAssertions.assertSoftly {
+            it.assertThat(actualValue.name).isEqualTo(expectedValue.name)
+            it.assertThat(actualValue.number).isEqualTo(expectedValue.number)
+            it.assertThat(actualValue.double).isEqualTo(expectedValue.double)
+        }
+    }
+
+    @Test
+    fun `Test fromJsonArray`() {
+        val expectedValue = TestClass(double = 12.3)
+        val actualList = Json.fromJsonArray<List<TestClass>>(Json.toJson(listOf(expectedValue)))
+
+        SoftAssertions.assertSoftly {
+            val actualValue = actualList[0]
             it.assertThat(actualValue.name).isEqualTo(expectedValue.name)
             it.assertThat(actualValue.number).isEqualTo(expectedValue.number)
             it.assertThat(actualValue.double).isEqualTo(expectedValue.double)

@@ -1,7 +1,7 @@
 package com.psmelser.jackson.json
 
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonNode
+
 
 object Json {
 	var jsonConverter: JsonConverter = JsonConverter()
@@ -18,16 +18,12 @@ object Json {
         return jsonConverter.fromJson(jsonString, targetClass)
     }
 
-    @JvmStatic fun <T> fromJson(jsonString: String, targetClass: TypeReference<*>): T {
-        return jsonConverter.fromJson(jsonString, targetClass)
-    }
-
-    @JvmStatic fun <T> fromJson(jsonString: String, targetClass: Class<T>, serializationSettings: JsonSerializationSettings): T {
-        return jsonConverter.fromJson(jsonString, targetClass, serializationSettings)
-    }
-
     @JvmStatic inline fun <reified T> fromJson(jsonString: String): T {
 		return jsonConverter.fromJson(jsonString)
+	}
+
+    @JvmStatic inline fun <reified T> fromJsonArray(jsonString: String): T {
+        return jsonConverter.fromJsonArray(jsonString)
 	}
 
     @JvmStatic inline fun <reified T> fromJson(jsonString: String, serializationSettings: JsonSerializationSettings): T {
