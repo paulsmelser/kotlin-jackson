@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/psmelser/kotlin-jackson/kotlin-jackson-json/images/download.svg) ](https://bintray.com/psmelser/kotlin-jackson/kotlin-jackson-json/_latestVersion)
+
 # kotlin-jackson
 A simple library to kotlinize jackson libbraries for JSON serialization. 
 
