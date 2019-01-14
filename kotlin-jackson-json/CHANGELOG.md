@@ -12,7 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Security
 ### Fixed
 
-## [0.1.4]
+## [0.1.8]
 
 ### Added
-- Initial release. Configurable Json serialization using Jackson libraries. You may use the `Json` class as a static preconfigured serializer or opt to configure your own `JsonConverter`.   
+- Initial release. Configurable Json serialization using Jackson libraries. You may use the `Json` class as a preconfigured serializer object or opt to configure your own `JsonConverter` instance.
+
+## [0.1.9]
+
+### Added
+- `Json` and `JsonConverter` now have method `fromJsonArray` to handle de-serializing collection types 
