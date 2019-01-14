@@ -1,0 +1,9 @@
+language: java
+dist: trusty
+branches:
+  only:
+    - master
+jobs:
+  include:
+    - stage: Tests
+      script: gradle test

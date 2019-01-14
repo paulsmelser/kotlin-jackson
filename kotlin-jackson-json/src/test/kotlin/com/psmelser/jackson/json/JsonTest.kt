@@ -1,5 +1,10 @@
 package com.psmelser.jackson.json
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.MapperFeature
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.assertj.core.api.SoftAssertions
@@ -60,6 +65,21 @@ class JsonTest {
 
     @Test
     fun `Test fromJson blah`() {
+        assertThatThrownBy { Json.fromJson<TestClass>("{\"name\":\"world\",\"number:\"1\",\"double\":\"ahhh\"}") }
+                .hasMessageContaining("was expecting a colon to separate field name and value")
+                .isInstanceOf(JsonSerializationException::class.java)
+    }
+
+    @Test
+    fun `Test fromJson blah settings`() {
+        Json.converter(JsonSerializationSettings.Builder()
+                .with(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .with(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
+                .with(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                .with(MapperFeature.DEFAULT_VIEW_INCLUSION, false)
+                .with(JavaTimeModule())
+                .with(KotlinModule())
+                .build())
         assertThatThrownBy { Json.fromJson<TestClass>("{\"name\":\"world\",\"number:\"1\",\"double\":\"ahhh\"}") }
                 .hasMessageContaining("was expecting a colon to separate field name and value")
                 .isInstanceOf(JsonSerializationException::class.java)
