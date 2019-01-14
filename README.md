@@ -1,7 +1,9 @@
 [ ![Download](https://api.bintray.com/packages/psmelser/kotlin-jackson/kotlin-jackson-json/images/download.svg) ](https://bintray.com/psmelser/kotlin-jackson/kotlin-jackson-json/_latestVersion) [![Build Status](https://travis-ci.com/paulsmelser/kotlin-jackson.svg?branch=master)](https://travis-ci.com/paulsmelser/kotlin-jackson)
 
 # kotlin-jackson
-A simple library to kotlinize jackson libbraries for JSON serialization. 
+A simple libraries to kotlinize jackson libraries for JSON and YAML serialization. 
+
+## kotlin-jackson-json
 
 ### Serialize using singlton Json object
 ```kotlin
