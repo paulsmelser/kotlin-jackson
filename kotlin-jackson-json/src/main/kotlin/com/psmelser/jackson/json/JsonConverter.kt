@@ -9,32 +9,27 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 
-class JsonConverter {
-    val objectMapper: ObjectMapper
+class JsonConverter(val objectMapper: ObjectMapper) {
 
-    constructor() {
-        objectMapper = JsonSerializationSettings.Builder()
-                .with(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .with(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
-                .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                .with(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
-                .with(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                .with(MapperFeature.DEFAULT_VIEW_INCLUSION, false)
-                .with(JavaTimeModule())
-                .with(KotlinModule())
-                .build()
-                .createMapper()
-    }
+    constructor(): this(JsonSerializationSettings.Builder()
+            .with(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .with(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
+            .with(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .with(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS, false)
+            .with(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+            .with(MapperFeature.DEFAULT_VIEW_INCLUSION, false)
+            .with(JavaTimeModule())
+            .with(KotlinModule())
+            .build()
+            .createMapper())
 
-    constructor(serializationSettings: JsonSerializationSettings) {
-        this.objectMapper = serializationSettings.createMapper()
-    }
+    constructor(serializationSettings: JsonSerializationSettings) : this(serializationSettings.createMapper())
 
     fun <T> fromJson(jsonString: String, targetClass: Class<T>): T {
         return wrapException { objectMapper.reader().forType(targetClass).readValue(jsonString) }
     }
 
-    inline fun <T> fromJsonArray(jsonString: String): T {
+    inline fun <reified T> fromJsonArray(jsonString: String): T {
         return try {
             val typeRef = object : TypeReference<T>() {}
             objectMapper.readValue(jsonString, typeRef)
